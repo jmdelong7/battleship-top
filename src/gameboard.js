@@ -13,5 +13,5 @@ export class Gameboard {
     this.board = Array(10).fill(Array(10).fill(null));
   }
 
-  placeShip() {}
+  placeShip(ship, direction) {}
 }

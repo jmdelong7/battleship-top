@@ -5,8 +5,16 @@
 // 4	    Submarine	      3
 // 5	    Destroyer	      2
 export class Ship {
-  constructor(length) {
-    this.length = length;
+  constructor(name) {
+    const lengthOfShips = {
+      carrier: 5,
+      battleship: 4,
+      cruiser: 3,
+      submarine: 3,
+      destroyer: 2,
+    };
+    this.name = name.toLowerCase();
+    this.length = lengthOfShips[this.name] || 0;
     this.timesHit = 0;
   }
 
@@ -15,6 +23,6 @@ export class Ship {
   }
 
   isSunk() {
-    return this.timesHit === this.length ? true : false;
+    return this.timesHit === this.length;
   }
 }
