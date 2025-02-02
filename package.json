@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "watch": "jest --watch main.js",
+    "watch": "jest --watch ships.js",
     "dev": "webpack serve --open --config webpack/webpack.dev.js",
     "build": "webpack --config webpack/webpack.prod.js",
     "deploy": "gh-pages -d dist"
@@ -30,6 +30,7 @@
     "gh-pages": "^6.3.0",
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.3",
+    "jest": "^29.7.0",
     "style-loader": "^4.0.0",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1",
