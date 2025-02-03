@@ -10,8 +10,18 @@ import { Ship } from './ships';
 export class Gameboard {
   constructor() {
     // 10 x 10
-    this.board = Array(10).fill(Array(10).fill(null));
+    this.board = Array.from({ length: 10 }, () => Array(10).fill(null));
   }
 
-  placeShip(ship, direction) {}
+  placeShip(shipName, coord, direction) {
+    const ship = new Ship(shipName);
+    const [col, row] = [coord[0], 9 - coord[1]];
+    const currBoard = this.board;
+
+    if (direction === 'vertical') {
+      for (let i = 0; i < ship.length; i++) {
+        currBoard[row - i][col] = shipName;
+      }
+    }
+  }
 }

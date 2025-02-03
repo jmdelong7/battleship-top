@@ -4,6 +4,7 @@
 // 3	    Cruiser	        3
 // 4	    Submarine	      3
 // 5	    Destroyer	      2
+
 export class Ship {
   constructor(name) {
     const lengthOfShips = {
