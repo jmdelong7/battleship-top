@@ -19,9 +19,25 @@ export class Gameboard {
     const currBoard = this.board;
 
     if (direction === 'vertical') {
+      if (row - ship.length < 0) {
+        throw new Error('ship to big to be placed there');
+      }
+
       for (let i = 0; i < ship.length; i++) {
         currBoard[row - i][col] = shipName;
       }
     }
+
+    if (direction === 'horizontal') {
+      if (col + ship.length > 0) {
+        throw new Error('ship to big to be placed there');
+      }
+
+      for (let i = 0; i < ship.length; i++) {
+        currBoard[row][col + i] = shipName;
+      }
+    }
+
+    this.board = currBoard;
   }
 }

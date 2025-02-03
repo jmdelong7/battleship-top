@@ -22,10 +22,26 @@ test('place ship, vertical, in range', () => {
   expect(gameboard.board).toEqual(dummyBoard);
 });
 
-// test('place ship, out of range', () => {
-//   const gameboard = new Gameboard();
-//   gameboard.placeShip('carrier', [7, 8], 'vertical');
-//   expect(gameboard.placeShip('carrier', [7, 8], 'vertical')).toThrow(
-//     'out of board range'
-//   );
-// });
+test('place ship, horizontal, in range', () => {
+  const dummyBoard = Array.from({ length: 10 }, () => Array(10).fill(null));
+  dummyBoard[2][5] = 'carrier';
+  dummyBoard[2][6] = 'carrier';
+  dummyBoard[2][7] = 'carrier';
+  dummyBoard[2][8] = 'carrier';
+  dummyBoard[2][9] = 'carrier';
+
+  const gameboard = new Gameboard();
+  gameboard.placeShip('carrier', [5, 7], 'horizontal');
+  expect(gameboard.board).toEqual(dummyBoard);
+});
+
+test.only('place ship, out of range', () => {
+  const gameboard = new Gameboard();
+  expect(() => gameboard.placeShip('carrier', [7, 7], 'vertical')).toThrow(
+    'ship to big to be placed there'
+  );
+
+  expect(() =>
+    gameboard.placeShip('battleship', [7, 7], 'horizontal')
+  ).toThrow('ship to big to be placed there');
+});
