@@ -9,7 +9,6 @@ import { Ship } from './ships';
 
 export class Gameboard {
   constructor() {
-    // 10 x 10
     this.board = Array.from({ length: 10 }, () => Array(10).fill(null));
     this.ships = {
       carrier: new Ship('carrier'),
@@ -18,11 +17,11 @@ export class Gameboard {
       submarine: new Ship('submarine'),
       destroyer: new Ship('destroyer'),
     };
+    this.shipsSunk = 0;
   }
 
   placeShip(shipName, coord, direction) {
     const ship = this.ships[shipName];
-    const currBoard = this.board;
     const [col, row] = [coord[0], 9 - coord[1]];
     if (row < 0 || row > 9 || col < 0 || col > 9) {
       throw new Error('coord out of bounds');
@@ -34,10 +33,10 @@ export class Gameboard {
       }
 
       for (let i = 0; i < ship.length; i++) {
-        if (currBoard[row - i][col]) {
+        if (this.board[row - i][col]) {
           return { success: false, reason: 'space occupied' };
         }
-        currBoard[row - i][col] = shipName;
+        this.board[row - i][col] = shipName;
       }
     }
 
@@ -47,36 +46,35 @@ export class Gameboard {
       }
 
       for (let i = 0; i < ship.length; i++) {
-        if (currBoard[row][col + i]) {
+        if (this.board[row][col + i]) {
           return { success: false, reason: 'space occupied' };
         }
-        currBoard[row][col + i] = shipName;
+        this.board[row][col + i] = shipName;
       }
     }
-
-    this.board = currBoard;
   }
 
   receiveAttack(coord) {
-    const currBoard = this.board;
     const [col, row] = [coord[0], 9 - coord[1]];
     if (row < 0 || row > 9 || col < 0 || col > 9) {
       throw new Error('coord out of bounds');
     }
 
-    const attack = currBoard[row][col];
-    if (attack === 'miss' || attack.includes('-hit')) {
+    let targetCoord = this.board[row][col];
+    if (targetCoord === 'miss' || targetCoord.includes('-hit')) {
       return { success: false, reason: 'space already attacked' };
     }
 
-    if (!attack) {
-      attack = 'miss';
+    if (!targetCoord) {
+      this.board[row][col] = 'miss';
       return { success: true, result: 'miss' };
     }
 
-    this.ships[attack].hit();
-    attack = attack + '-hit';
-    this.board = currBoard;
+    const shipName = targetCoord;
+    this.ships[shipName].hit();
+    this.board[row][col] = `${shipName}-hit`;
+    if (this.ships[shipName].isSunk()) this.shipsSunk++;
+
     return { success: true, result: 'hit' };
   }
 }

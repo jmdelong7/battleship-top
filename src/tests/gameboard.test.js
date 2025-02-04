@@ -53,8 +53,10 @@ test('place ship, space occupied', () => {
 test.only('receiveAttack, hit or miss', () => {
   const gameboard = new Gameboard();
   gameboard.placeShip('carrier', [0, 1], 'vertical');
-  gameboard.receiveAttack([1, 3]);
-  expect(() => gameboard.receiveAttack([1, 3])).toThrow(
-    'space already attacked'
-  );
+  expect(gameboard.receiveAttack([0, 3])).toEqual({
+    success: true,
+    result: 'hit',
+  });
+  console.log(gameboard.ships['carrier']);
+  expect(gameboard.ships['carrier'].timesHit).toBe(1);
 });
