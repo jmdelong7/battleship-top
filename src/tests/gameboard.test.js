@@ -42,10 +42,19 @@ test('place ship, out of range', () => {
   ).toThrow('ship to big to be placed there');
 });
 
-test.only('place ship, space occupied', () => {
+test('place ship, space occupied', () => {
   const gameboard = new Gameboard();
   gameboard.placeShip('carrier', [3, 2], 'vertical');
   expect(() => gameboard.placeShip('battleship', [3, 4], 'vertical')).toThrow(
     'space occupied'
+  );
+});
+
+test.only('receiveAttack, hit or miss', () => {
+  const gameboard = new Gameboard();
+  gameboard.placeShip('carrier', [0, 1], 'vertical');
+  gameboard.receiveAttack([1, 3]);
+  expect(() => gameboard.receiveAttack([1, 3])).toThrow(
+    'space already attacked'
   );
 });
