@@ -35,13 +35,17 @@ test('place ship, horizontal, in range', () => {
   expect(gameboard.board).toEqual(dummyBoard);
 });
 
-test.only('place ship, out of range', () => {
+test('place ship, out of range', () => {
   const gameboard = new Gameboard();
-  expect(() => gameboard.placeShip('carrier', [7, 7], 'vertical')).toThrow(
-    'ship to big to be placed there'
-  );
-
   expect(() =>
     gameboard.placeShip('battleship', [7, 7], 'horizontal')
   ).toThrow('ship to big to be placed there');
+});
+
+test.only('place ship, space occupied', () => {
+  const gameboard = new Gameboard();
+  gameboard.placeShip('carrier', [3, 2], 'vertical');
+  expect(() => gameboard.placeShip('battleship', [3, 4], 'vertical')).toThrow(
+    'space occupied'
+  );
 });

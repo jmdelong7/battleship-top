@@ -20,20 +20,22 @@ export class Gameboard {
 
     if (direction === 'vertical') {
       if (row - ship.length < 0) {
-        throw new Error('ship to big to be placed there');
+        throw new Error('ship to long to be placed there');
       }
 
       for (let i = 0; i < ship.length; i++) {
+        if (currBoard[row - i][col]) throw new Error('space occupied');
         currBoard[row - i][col] = shipName;
       }
     }
 
     if (direction === 'horizontal') {
-      if (col + ship.length > 0) {
-        throw new Error('ship to big to be placed there');
+      if (col + ship.length > 9) {
+        throw new Error('ship to long to be placed there');
       }
 
       for (let i = 0; i < ship.length; i++) {
+        if (currBoard[row][col + i]) throw new Error('space occupied');
         currBoard[row][col + i] = shipName;
       }
     }
