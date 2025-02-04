@@ -57,6 +57,8 @@ test.only('receiveAttack, hit or miss', () => {
     success: true,
     result: 'hit',
   });
-  console.log(gameboard.ships['carrier']);
+
   expect(gameboard.ships['carrier'].timesHit).toBe(1);
+
+  expect(gameboard.allShipsSunk).toBe(false);
 });

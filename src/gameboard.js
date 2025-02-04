@@ -20,6 +20,10 @@ export class Gameboard {
     this.shipsSunk = 0;
   }
 
+  get allShipsSunk() {
+    return this.shipsSunk === 5;
+  }
+
   placeShip(shipName, coord, direction) {
     const ship = this.ships[shipName];
     const [col, row] = [coord[0], 9 - coord[1]];
