@@ -1,4 +1,3 @@
-import { Ship } from '../ships';
 import { Gameboard } from '../gameboard';
 
 // No.	Class of ship	  Size
@@ -50,7 +49,7 @@ test('place ship, space occupied', () => {
   );
 });
 
-test.only('receiveAttack, hit or miss', () => {
+test('receiveAttack, hit or miss', () => {
   const gameboard = new Gameboard();
   gameboard.placeShip('carrier', [0, 1], 'vertical');
   expect(gameboard.receiveAttack([0, 3])).toEqual({
