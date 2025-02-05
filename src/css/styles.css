@@ -69,3 +69,19 @@ svg {
     scroll-behavior: auto !important;
   }
 }
+
+/* My styles */
+
+.gameboard {
+  display: grid;
+  grid-template-rows: repeat(10, 1fr);
+  grid-template-columns: repeat(10, 1fr);
+  width: 300px; /* Adjust as needed */
+  height: 300px;
+  gap: 1px;
+}
+
+.gameboard--cell {
+  border: 1px solid black;
+  text-align: center;
+}
