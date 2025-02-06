@@ -1,8 +1,7 @@
 import { Gameboard } from './gameboard';
 
 export class Player {
-  constructor(type) {
+  constructor() {
     this.gameboard = new Gameboard();
-    this.type = type;
   }
 }

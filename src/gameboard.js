@@ -56,6 +56,33 @@ export class Gameboard {
         this.board[row][col + i] = shipName;
       }
     }
+
+    return { success: true, result: `${shipName} placed` };
+  }
+
+  placeShipsRandomly() {
+    Object.keys(this.ships).forEach((shipName) => {
+      const direction = Math.random() < 0.5 ? 'vertical' : 'horizontal';
+      const shipLength = this.ships[shipName].length;
+
+      let randomCoord = () => {
+        if (direction === 'vertical') {
+          const row = Math.floor(Math.random() * 10);
+          const col = Math.floor(Math.random() * shipLength);
+          return [row, col];
+        } else if (direction === 'horizontal') {
+          const row = Math.floor(Math.random() * shipLength);
+          const col = Math.floor(Math.random() * 10);
+          return [row, col];
+        }
+      };
+
+      let shipPlaced = false;
+      while (!shipPlaced) {
+        const result = this.placeShip(shipName, randomCoord(), direction);
+        if (result.success === true) shipPlaced = true;
+      }
+    });
   }
 
   receiveAttack(coord) {

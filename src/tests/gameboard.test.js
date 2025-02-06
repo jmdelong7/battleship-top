@@ -61,3 +61,9 @@ test('receiveAttack, hit or miss', () => {
 
   expect(gameboard.allShipsSunk).toBe(false);
 });
+
+test.only('placeShipsRandomly, ship placement', () => {
+  const gameboard = new Gameboard();
+  gameboard.placeShipsRandomly();
+  console.log(gameboard.board);
+});

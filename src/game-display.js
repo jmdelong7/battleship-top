@@ -22,7 +22,7 @@ export class GameDisplay {
     });
   }
 
-  getCell(board, coord) {
+  getBoardCell(board, coord) {
     const [col, row] = [coord[0], 9 - coord[1]];
     const boardRow = [...board.children][row];
     const boardCell = [...boardRow.children][col];
