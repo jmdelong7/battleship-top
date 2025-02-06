@@ -75,13 +75,39 @@ svg {
 .game__board {
   display: grid;
   grid-template-rows: repeat(10, 1fr);
-  grid-template-columns: repeat(10, 1fr);
   width: 300px; /* Adjust as needed */
   height: 300px;
+  margin: 20px;
   gap: 1px;
 }
 
-.game__board--cell {
+.game__board__row {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 1px;
+}
+
+.game__board__cell {
   border: 1px solid black;
   text-align: center;
+}
+
+.carrier {
+  background-color: hsl(210, 80%, 45%);
+}
+
+.battleship {
+  background-color: hsl(135, 75%, 55%);
+}
+
+.cruiser {
+  background-color: hsl(0, 85%, 40%);
+}
+
+.submarine {
+  background-color: hsl(280, 70%, 60%);
+}
+
+.destroyer {
+  background-color: hsl(45, 90%, 50%);
 }
