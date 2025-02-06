@@ -22,8 +22,11 @@ export class GameDisplay {
     });
   }
 
-  getCell(coord) {
+  getCell(board, coord) {
     const [col, row] = [coord[0], 9 - coord[1]];
+    const boardRow = [...board.children][row];
+    const boardCell = [...boardRow.children][col];
+    return boardCell;
   }
 
   placeShip(board, shipName, coord, direction) {}
