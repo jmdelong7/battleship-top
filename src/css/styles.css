@@ -81,6 +81,10 @@ svg {
   gap: 1px;
 }
 
+.game {
+  display: flex;
+}
+
 .game__board__row {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
