@@ -24,6 +24,10 @@ export class Gameboard {
     return this.shipsSunk === 5;
   }
 
+  clearBoard() {
+    this.board = Array.from({ length: 10 }, () => Array(10).fill(null));
+  }
+
   placeShip(shipName, coord, direction) {
     const ship = this.ships[shipName];
     const [col, row] = [coord[0], 9 - coord[1]];
@@ -61,6 +65,7 @@ export class Gameboard {
   }
 
   placeShipsRandomly() {
+    this.clearBoard();
     Object.keys(this.ships).forEach((shipName) => {
       const direction = Math.random() < 0.5 ? 'vertical' : 'horizontal';
       const shipLength = this.ships[shipName].length;
@@ -107,5 +112,10 @@ export class Gameboard {
     if (this.ships[shipName].isSunk()) this.shipsSunk++;
 
     return { success: true, result: 'hit' };
+  }
+
+  getBoardCell(coord) {
+    const [col, row] = [coord[0], 9 - coord[1]];
+    return this.board[row][col];
   }
 }
