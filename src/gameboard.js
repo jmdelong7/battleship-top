@@ -45,7 +45,6 @@ export class Gameboard {
         if (this.board[row - i][col]) {
           return { success: false, reason: 'space occupied' };
         }
-        console.log([row - i, col]);
         shipPlacementCoords.push([row - i, col]);
       }
 
@@ -64,7 +63,7 @@ export class Gameboard {
         if (this.board[row][col + i]) {
           return { success: false, reason: 'space occupied' };
         }
-        shipPlacementCoords.push([row, col + 1]);
+        shipPlacementCoords.push([row, col + i]);
         // this.board[row][col + i] = shipName;
       }
 
