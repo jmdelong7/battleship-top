@@ -72,6 +72,15 @@ svg {
 
 /* My styles */
 
+:root {
+  --carrier-color: hsl(210, 80%, 45%);
+  --battleship-color: hsl(135, 75%, 55%);
+  --cruiser-color: hsl(40, 85%, 40%);
+  --submarine-color: hsl(280, 70%, 60%);
+  --destroyer-color: hsl(50, 90%, 50%);
+  --hit-color: (0, 75%, 50%);
+}
+
 .game__board {
   display: grid;
   grid-template-rows: repeat(10, 1fr);
@@ -96,22 +105,26 @@ svg {
   text-align: center;
 }
 
+.game__board__cell[data-state*='-hit'] {
+  background-color: var(--hit-color);
+}
+
 .game__board__cell[data-state='carrier'] {
-  background-color: hsl(210, 80%, 45%);
+  background-color: var(--carrier-color);
 }
 
 .game__board__cell[data-state='battleship'] {
-  background-color: hsl(135, 75%, 55%);
+  background-color: var(--battleship-color);
 }
 
 .game__board__cell[data-state='cruiser'] {
-  background-color: hsl(0, 85%, 40%);
+  background-color: var(--cruiser-color);
 }
 
 .game__board__cell[data-state='submarine'] {
-  background-color: hsl(280, 70%, 60%);
+  background-color: var(--submarine-color);
 }
 
 .game__board__cell[data-state='destroyer'] {
-  background-color: hsl(45, 90%, 50%);
+  background-color: var(--destroyer-color);
 }
