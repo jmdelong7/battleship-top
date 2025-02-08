@@ -25,6 +25,15 @@ export class GameDisplay {
     });
   }
 
+  clearBoard(player) {
+    let displayBoard = null;
+    if (player === this.human) displayBoard = this.humanBoard;
+    if (player === this.computer) displayBoard = this.computerBoard;
+
+    player.gameboard.clearBoard();
+    this.updatePlayerGameboard(player);
+  }
+
   getBoardCell(board, coord) {
     const [col, row] = [coord[0], 9 - coord[1]];
     const boardRow = [...board.children][row];
@@ -51,5 +60,10 @@ export class GameDisplay {
         this.updateCellDataState(player, [row, col]);
       }
     }
+  }
+
+  placeShipsRandomly(player) {
+    player.gameboard.placeShipsRandomly();
+    this.updatePlayerGameboard(player);
   }
 }
