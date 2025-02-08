@@ -4,9 +4,11 @@ export class GameDisplay {
   constructor() {
     this.humanBoard = document.querySelector('.game__board--human');
     this.computerBoard = document.querySelector('.game__board--computer');
+
     this.game = new GameController();
     this.human = this.game.human;
     this.computer = this.game.computer;
+
     this.initGameboard(this.humanBoard);
     this.initGameboard(this.computerBoard);
   }
@@ -43,19 +45,11 @@ export class GameDisplay {
     }
   }
 
-  displayShipsRandomly(player) {
-    player.gameboard.displayShipsRandomly();
-    player.gameboard.forEach((row) => {});
-  }
-
-  placeShip(board, shipName, coord, direction) {}
-
-  placeShipsRandomly(board) {
-    const ships = Object.keys(board.gameboard.ships);
-    board.placeShip('carrier', [1, 2], 'horizontal');
-  }
-
-  cellRecieveAttack(cell) {
-    cell.addEventListener('click', () => {});
+  updatePlayerGameboard(player) {
+    for (let row = 0; row < 9; row++) {
+      for (let col = 0; col < 9; col++) {
+        this.updateCellDataState(player, [row, col]);
+      }
+    }
   }
 }

@@ -92,22 +92,22 @@ svg {
   text-align: center;
 }
 
-.carrier {
+.game__board__cell[data-state='carrier'] {
   background-color: hsl(210, 80%, 45%);
 }
 
-.battleship {
+.game__board__cell[data-state='battleship'] {
   background-color: hsl(135, 75%, 55%);
 }
 
-.cruiser {
+.game__board__cell[data-state='cruiser'] {
   background-color: hsl(0, 85%, 40%);
 }
 
-.submarine {
+.game__board__cell[data-state='submarine'] {
   background-color: hsl(280, 70%, 60%);
 }
 
-.destroyer {
+.game__board__cell[data-state='destroyer'] {
   background-color: hsl(45, 90%, 50%);
 }
