@@ -28,7 +28,7 @@ export class Gameboard {
     this.board = Array.from({ length: 10 }, () => Array(10).fill(null));
   }
 
-  placeShip(shipName, coord, direction) {
+  placeShip(shipName, coord, direction = 'vertical') {
     const ship = this.ships[shipName];
     const [col, row] = [coord[0], 9 - coord[1]];
     if (row < 0 || row > 9 || col < 0 || col > 9) {
@@ -36,16 +36,22 @@ export class Gameboard {
     }
 
     if (direction === 'vertical') {
-      if (row - ship.length < 0) {
+      if (row + 1 - ship.length < 0) {
         return { success: false, reason: 'ship out of bounds' };
       }
 
+      let shipPlacementCoords = [];
       for (let i = 0; i < ship.length; i++) {
         if (this.board[row - i][col]) {
           return { success: false, reason: 'space occupied' };
         }
-        this.board[row - i][col] = shipName;
+        console.log([row - i, col]);
+        shipPlacementCoords.push([row - i, col]);
       }
+
+      shipPlacementCoords.forEach((placementCoord) => {
+        this.board[placementCoord[0]][placementCoord[1]] = shipName;
+      });
     }
 
     if (direction === 'horizontal') {
@@ -53,12 +59,18 @@ export class Gameboard {
         return { success: false, reason: 'ship out of bounds' };
       }
 
+      let shipPlacementCoords = [];
       for (let i = 0; i < ship.length; i++) {
         if (this.board[row][col + i]) {
           return { success: false, reason: 'space occupied' };
         }
-        this.board[row][col + i] = shipName;
+        shipPlacementCoords.push([row, col + 1]);
+        // this.board[row][col + i] = shipName;
       }
+
+      shipPlacementCoords.forEach((placementCoord) => {
+        this.board[placementCoord[0]][placementCoord[1]] = shipName;
+      });
     }
 
     return { success: true, result: `${shipName} placed` };
