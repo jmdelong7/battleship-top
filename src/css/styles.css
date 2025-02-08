@@ -78,7 +78,8 @@ svg {
   --cruiser-color: hsl(40, 85%, 40%);
   --submarine-color: hsl(280, 70%, 60%);
   --destroyer-color: hsl(50, 90%, 50%);
-  --hit-color: (0, 75%, 50%);
+  --hit-color: hsl(0, 75%, 50%);
+  --miss-color: hsl(0, 0%, 57%);
 }
 
 .game__board {
@@ -107,6 +108,10 @@ svg {
 
 .game__board__cell[data-state*='-hit'] {
   background-color: var(--hit-color);
+}
+
+.game__board__cell[data-state='miss'] {
+  background-color: var(--miss-color);
 }
 
 .game__board__cell[data-state='carrier'] {

@@ -108,13 +108,13 @@ export class Gameboard {
     }
 
     let targetCoord = this.board[row][col];
-    if (targetCoord === 'miss' || targetCoord.includes('-hit')) {
-      return { success: false, reason: 'space already attacked' };
-    }
-
     if (!targetCoord) {
       this.board[row][col] = 'miss';
       return { success: true, result: 'miss' };
+    }
+
+    if (targetCoord === 'miss' || targetCoord.includes('-hit')) {
+      return { success: false, reason: 'space already attacked' };
     }
 
     const shipName = targetCoord;

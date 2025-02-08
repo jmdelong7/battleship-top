@@ -34,19 +34,19 @@ export class GameDisplay {
     this.updatePlayerGameboard(player);
   }
 
-  getBoardCell(board, coord) {
+  getBoardCell(player, coord) {
+    let displayBoard = null;
+    if (player === this.human) displayBoard = this.humanBoard;
+    if (player === this.computer) displayBoard = this.computerBoard;
+
     const [col, row] = [coord[0], 9 - coord[1]];
-    const boardRow = [...board.children][row];
+    const boardRow = [...displayBoard.children][row];
     const boardCell = [...boardRow.children][col];
     return boardCell;
   }
 
   updateCellDataState(player, coord) {
-    let displayBoard = null;
-    if (player === this.human) displayBoard = this.humanBoard;
-    if (player === this.computer) displayBoard = this.computerBoard;
-
-    const cell = this.getBoardCell(displayBoard, coord);
+    const cell = this.getBoardCell(player, coord);
     if (!player.gameboard.getBoardCell(coord)) {
       cell.setAttribute('data-state', 'empty');
     } else {
@@ -59,6 +59,14 @@ export class GameDisplay {
       for (let col = 0; col <= 9; col++) {
         this.updateCellDataState(player, [row, col]);
       }
+    }
+  }
+
+  attack(player, coord) {
+    const result = player.gameboard.receiveAttack(coord);
+    this.updateCellDataState(player, coord);
+    if (result.result === 'hit') {
+      this.getBoardCell(player, coord).textContent = 'X';
     }
   }
 
