@@ -30,27 +30,28 @@ export class GameDisplay {
     return boardCell;
   }
 
-  changeCellDataState(player, coord) {
+  updateCellDataState(player, coord) {
     let displayBoard = null;
-    if (displayBoard === this.human) displayBoard = this.humanBoard;
-    if (displayBoard === this.computer) displayBoard = this.computerBoard;
+    if (player === this.human) displayBoard = this.humanBoard;
+    if (player === this.computer) displayBoard = this.computerBoard;
 
     const cell = this.getBoardCell(displayBoard, coord);
-    if (!player.gameBoard(coord)) {
+    if (!player.gameboard.getBoardCell(coord)) {
       cell.setAttribute('data-state', 'empty');
-      return;
-    } else cell.setAttribute(player.gameBoard(coord));
+    } else {
+      cell.setAttribute('data-state', player.gameboard.getBoardCell(coord));
+    }
   }
 
   displayShipsRandomly(player) {
-    player.gameBoard.displayShipsRandomly();
-    player.gameBoard.forEach((row) => {});
+    player.gameboard.displayShipsRandomly();
+    player.gameboard.forEach((row) => {});
   }
 
   placeShip(board, shipName, coord, direction) {}
 
   placeShipsRandomly(board) {
-    const ships = Object.keys(board.gameBoard.ships);
+    const ships = Object.keys(board.gameboard.ships);
     board.placeShip('carrier', [1, 2], 'horizontal');
   }
 
