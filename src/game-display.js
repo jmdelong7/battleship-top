@@ -1,15 +1,9 @@
-import { GameController } from './game-controller';
-
 export class GameDisplay {
   constructor() {
     this.humanBoard = document.querySelector('.game__board--human');
     this.computerBoard = document.querySelector('.game__board--computer');
     this.initGameboard(this.humanBoard);
     this.initGameboard(this.computerBoard);
-
-    this.game = new GameController();
-    this.human = this.game.human;
-    this.computer = this.game.computer;
   }
 
   initGameboard(board) {
@@ -24,53 +18,21 @@ export class GameDisplay {
     });
   }
 
-  clearBoard(player) {
-    let displayBoard = null;
-    if (player === this.human) displayBoard = this.humanBoard;
-    if (player === this.computer) displayBoard = this.computerBoard;
-
-    player.clearBoard();
-    this.updatePlayerGameboard(player);
-  }
-
-  getBoardCell(player, coord) {
-    let displayBoard = null;
-    if (player === this.human) displayBoard = this.humanBoard;
-    if (player === this.computer) displayBoard = this.computerBoard;
-
+  getBoardCell(board, coord) {
     const [col, row] = [coord[0], 9 - coord[1]];
-    const boardRow = [...displayBoard.children][row];
+    const boardRow = [...board.children][row];
     const boardCell = [...boardRow.children][col];
     return boardCell;
   }
 
-  updateCellDataState(player, coord) {
-    const cell = this.getBoardCell(player, coord);
-    if (!player.getBoardCell(coord)) {
-      cell.setAttribute('data-state', 'empty');
-    } else {
-      cell.setAttribute('data-state', player.getBoardCell(coord));
-    }
-  }
-
-  updatePlayerGameboard(player) {
+  clearBoards() {
     for (let row = 0; row <= 9; row++) {
       for (let col = 0; col <= 9; col++) {
-        this.updateCellDataState(player, [row, col]);
+        const human = this.getBoardCell(this.human, [row, col]);
+        const computer = this.getBoardCell(this.computer, [row, col]);
+        human.cell.Attribute('data-state', 'empty');
+        computer.cell.Attribute('data-state', 'empty');
       }
     }
-  }
-
-  attack(player, coord) {
-    const result = player.gameboard.receiveAttack(coord);
-    this.updateCellDataState(player, coord);
-    if (result.result === 'hit') {
-      this.getBoardCell(player, coord).textContent = 'X';
-    }
-  }
-
-  placeShipsRandomly(player) {
-    player.placeShipsRandomly();
-    this.updatePlayerGameboard(player);
   }
 }
