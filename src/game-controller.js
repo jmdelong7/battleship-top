@@ -1,8 +1,8 @@
-import { Player } from './player';
+import { Gameboard } from './gameboard';
 
 export class GameController {
   constructor() {
-    this.human = new Player();
-    this.computer = new Player();
+    this.human = new Gameboard();
+    this.computer = new Gameboard();
   }
 }

@@ -4,13 +4,12 @@ export class GameDisplay {
   constructor() {
     this.humanBoard = document.querySelector('.game__board--human');
     this.computerBoard = document.querySelector('.game__board--computer');
+    this.initGameboard(this.humanBoard);
+    this.initGameboard(this.computerBoard);
 
     this.game = new GameController();
     this.human = this.game.human;
     this.computer = this.game.computer;
-
-    this.initGameboard(this.humanBoard);
-    this.initGameboard(this.computerBoard);
   }
 
   initGameboard(board) {
@@ -30,7 +29,7 @@ export class GameDisplay {
     if (player === this.human) displayBoard = this.humanBoard;
     if (player === this.computer) displayBoard = this.computerBoard;
 
-    player.gameboard.clearBoard();
+    player.clearBoard();
     this.updatePlayerGameboard(player);
   }
 
@@ -47,10 +46,10 @@ export class GameDisplay {
 
   updateCellDataState(player, coord) {
     const cell = this.getBoardCell(player, coord);
-    if (!player.gameboard.getBoardCell(coord)) {
+    if (!player.getBoardCell(coord)) {
       cell.setAttribute('data-state', 'empty');
     } else {
-      cell.setAttribute('data-state', player.gameboard.getBoardCell(coord));
+      cell.setAttribute('data-state', player.getBoardCell(coord));
     }
   }
 
@@ -71,7 +70,7 @@ export class GameDisplay {
   }
 
   placeShipsRandomly(player) {
-    player.gameboard.placeShipsRandomly();
+    player.placeShipsRandomly();
     this.updatePlayerGameboard(player);
   }
 }
