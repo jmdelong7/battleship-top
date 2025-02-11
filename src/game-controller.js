@@ -5,34 +5,19 @@ export class GameController {
   constructor() {
     this.human = new Gameboard();
     this.computer = new Gameboard();
+
     this.display = new GameDisplay();
+    this.humanDisplay = this.display.humanBoard;
+    this.computerDisplay = this.display.computerBoard;
   }
 
-  clearBoards() {
-    this.initGameboard(this.humanBoard);
-    this.initGameboard(this.computerBoard);
-
-    let displayBoard = null;
-    if (player === this.human) displayBoard = this.humanBoard;
-    if (player === this.computer) displayBoard = this.computerBoard;
-
-    player.clearBoard();
-    this.updatePlayerGameboard(player);
-  }
-
-  getBoardCell(player, coord) {
-    let displayBoard = null;
-    if (player === this.human) displayBoard = this.humanBoard;
-    if (player === this.computer) displayBoard = this.computerBoard;
-
-    const [col, row] = [coord[0], 9 - coord[1]];
-    const boardRow = [...displayBoard.children][row];
-    const boardCell = [...boardRow.children][col];
-    return boardCell;
+  getDisplayBoard(player) {
+    return player === this.human ? this.humanDisplay : this.computerDisplay;
   }
 
   updateCellDataState(player, coord) {
-    const cell = this.getBoardCell(player, coord);
+    let board = this.getDisplayBoard(player);
+    const cell = this.display.getDisplayBoardCell(board, coord);
     if (!player.getBoardCell(coord)) {
       cell.setAttribute('data-state', 'empty');
     } else {
@@ -48,16 +33,17 @@ export class GameController {
     }
   }
 
-  attack(player, coord) {
-    const result = player.gameboard.receiveAttack(coord);
-    this.updateCellDataState(player, coord);
-    if (result.result === 'hit') {
-      this.getBoardCell(player, coord).textContent = 'X';
-    }
-  }
-
   placeShipsRandomly(player) {
     player.placeShipsRandomly();
     this.updatePlayerGameboard(player);
+  }
+
+  attackPlayer(player, coord) {
+    const result = player.receiveAttack(coord);
+    this.updateCellDataState(player, coord);
+    if (result.result === 'hit') {
+      const board = this.getDisplayBoard(player);
+      this.display.getDisplayBoardCell(board, coord).textContent = 'X';
+    }
   }
 }

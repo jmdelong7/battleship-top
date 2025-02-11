@@ -104,6 +104,8 @@ svg {
 .game__board__cell {
   border: 1px solid black;
   text-align: center;
+  align-content: center;
+  font-weight: 800;
 }
 
 .game__board__cell[data-state*='-hit'] {

@@ -1,5 +1,5 @@
 import './css/styles.css';
-import { GameDisplay } from './game-display';
+import { GameController } from './game-controller';
 
-const gameDisplay = new GameDisplay();
-window.gameDisplay = gameDisplay;
+const game = new GameController();
+window.game = game;
