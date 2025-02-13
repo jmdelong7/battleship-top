@@ -26,9 +26,13 @@ export class GameController {
     return player === this.human ? this.humanDisplay : this.computerDisplay;
   }
 
+  getDisplayCell(player, coord) {
+    const displayBoard = this.getDisplayBoard(player);
+    return this.display.getDisplayBoardCell(displayBoard, coord);
+  }
+
   updateCellDataState(player, coord) {
-    let board = this.getDisplayBoard(player);
-    const cell = this.display.getDisplayBoardCell(board, coord);
+    const cell = this.getDisplayCell(player, coord);
     if (!player.getBoardCell(coord)) {
       cell.setAttribute('data-state', 'empty');
     } else {
@@ -49,7 +53,23 @@ export class GameController {
     this.updatePlayerGameboard(player);
   }
 
-  attackPlayer(player, coord) {
+  addCellEventListener(cell, coord) {
+    cell.addEventListener('click', () => {
+      this.attack(this.computer, coord);
+    });
+  }
+
+  addAttackListeners() {
+    for (let row = 0; row <= 9; row++) {
+      for (let col = 0; col <= 9; col++) {
+        const cell = this.getDisplayCell(this.computer, [row, col]);
+        const coord = [row, col];
+        this.addCellEventListener(cell, coord);
+      }
+    }
+  }
+
+  attack(player, coord) {
     const result = player.receiveAttack(coord);
     this.updateCellDataState(player, coord);
     if (result.result === 'hit') {
@@ -69,6 +89,6 @@ export class GameController {
     this.openCells[lastEle] = temp;
 
     const coord = this.openCells.pop();
-    this.attackPlayer(this.human, coord);
+    this.attack(this.human, coord);
   }
 }
