@@ -9,9 +9,11 @@ export class GameController {
     this.display = new GameDisplay();
     this.humanDisplay = this.display.humanBoard;
     this.computerDisplay = this.display.computerBoard;
+    this.randomBtn = this.display.randomBtn;
+    this.resetBtn = this.display.resetBtn;
 
     this.openCells = this.possibleCoords();
-    this.addAllAttackListeners();
+    this.addListeners();
   }
 
   possibleCoords(arr = []) {
@@ -49,9 +51,38 @@ export class GameController {
     }
   }
 
+  resetGame() {
+    this.display.clearDisplayBoards();
+    this.human.clearBoard();
+    this.computer.clearBoard();
+  }
+
   placeShipsRandomly(player) {
     player.placeShipsRandomly();
     this.updatePlayerGameboard(player);
+  }
+
+  attack(player, coord) {
+    const result = player.receiveAttack(coord);
+    this.updateCellDataState(player, coord);
+    if (result.result === 'hit') {
+      const board = this.getDisplayBoard(player);
+      this.display.getDisplayBoardCell(board, coord).textContent = 'X';
+    }
+    return result;
+  }
+
+  computerAttack() {
+    if (this.openCells.length === 0) return null; // game should be over
+    const randIdx = Math.floor(Math.random() * this.openCells.length);
+    const lastEle = this.openCells.length - 1;
+
+    const temp = this.openCells[randIdx];
+    this.openCells[randIdx] = this.openCells[lastEle];
+    this.openCells[lastEle] = temp;
+
+    const coord = this.openCells.pop();
+    this.attack(this.human, coord);
   }
 
   addCellAttackListener(cell, coord) {
@@ -77,26 +108,12 @@ export class GameController {
     }
   }
 
-  attack(player, coord) {
-    const result = player.receiveAttack(coord);
-    this.updateCellDataState(player, coord);
-    if (result.result === 'hit') {
-      const board = this.getDisplayBoard(player);
-      this.display.getDisplayBoardCell(board, coord).textContent = 'X';
-    }
-    return result;
-  }
-
-  computerAttack() {
-    if (this.openCells.length === 0) return null; // game should be over
-    const randIdx = Math.floor(Math.random() * this.openCells.length);
-    const lastEle = this.openCells.length - 1;
-
-    const temp = this.openCells[randIdx];
-    this.openCells[randIdx] = this.openCells[lastEle];
-    this.openCells[lastEle] = temp;
-
-    const coord = this.openCells.pop();
-    this.attack(this.human, coord);
+  addListeners() {
+    this.addAllAttackListeners();
+    this.resetBtn.addEventListener('click', () => this.resetGame());
+    this.randomBtn.addEventListener('click', () => {
+      this.placeShipsRandomly(this.human);
+      this.placeShipsRandomly(this.computer);
+    });
   }
 }
