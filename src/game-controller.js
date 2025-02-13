@@ -11,6 +11,7 @@ export class GameController {
     this.computerDisplay = this.display.computerBoard;
 
     this.openCells = this.possibleCoords();
+    this.addAllAttackListeners();
   }
 
   possibleCoords(arr = []) {
@@ -53,18 +54,25 @@ export class GameController {
     this.updatePlayerGameboard(player);
   }
 
-  addCellEventListener(cell, coord) {
-    cell.addEventListener('click', () => {
-      this.attack(this.computer, coord);
-    });
+  addCellAttackListener(cell, coord) {
+    cell.addEventListener(
+      'click',
+      () => {
+        this.attack(this.computer, coord);
+        this.computerAttack();
+      },
+      {
+        once: true,
+      }
+    );
   }
 
-  addAttackListeners() {
+  addAllAttackListeners() {
     for (let row = 0; row <= 9; row++) {
       for (let col = 0; col <= 9; col++) {
         const cell = this.getDisplayCell(this.computer, [row, col]);
         const coord = [row, col];
-        this.addCellEventListener(cell, coord);
+        this.addCellAttackListener(cell, coord);
       }
     }
   }
