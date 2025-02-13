@@ -6,7 +6,7 @@ export class GameDisplay {
     this.initGameboardDisplay(this.computerBoard);
 
     this.randomBtn = document.getElementById('random');
-    this.resetBtn = document.getElementById('reset');
+    this.newGameBtn = document.getElementById('new-game');
   }
 
   initGameboardDisplay(board) {
@@ -31,14 +31,13 @@ export class GameDisplay {
   clearDisplayBoards() {
     for (let row = 0; row <= 9; row++) {
       for (let col = 0; col <= 9; col++) {
-        this.getDisplayBoardCell(this.humanBoard, [row, col]).setAttribute(
-          'data-state',
-          'empty'
-        );
-        this.getDisplayBoardCell(this.computerBoard, [row, col]).setAttribute(
-          'data-state',
-          'empty'
-        );
+        const h = this.getDisplayBoardCell(this.humanBoard, [row, col]);
+        h.setAttribute('data-state', 'empty');
+        h.textContent = '';
+
+        const c = this.getDisplayBoardCell(this.computerBoard, [row, col]);
+        c.setAttribute('data-state', 'empty');
+        c.textContent = '';
       }
     }
   }

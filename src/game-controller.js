@@ -10,7 +10,7 @@ export class GameController {
     this.humanDisplay = this.display.humanBoard;
     this.computerDisplay = this.display.computerBoard;
     this.randomBtn = this.display.randomBtn;
-    this.resetBtn = this.display.resetBtn;
+    this.newGameBtn = this.display.newGameBtn;
 
     this.openCells = this.possibleCoords();
     this.addListeners();
@@ -51,10 +51,12 @@ export class GameController {
     }
   }
 
-  resetGame() {
+  newGame() {
+    this.human = new Gameboard();
+    this.computer = new Gameboard();
+    this.openCells = this.possibleCoords();
+
     this.display.clearDisplayBoards();
-    this.human.clearBoard();
-    this.computer.clearBoard();
   }
 
   placeShipsRandomly(player) {
@@ -110,7 +112,7 @@ export class GameController {
 
   addListeners() {
     this.addAllAttackListeners();
-    this.resetBtn.addEventListener('click', () => this.resetGame());
+    this.newGameBtn.addEventListener('click', () => this.newGame());
     this.randomBtn.addEventListener('click', () => {
       this.placeShipsRandomly(this.human);
       this.placeShipsRandomly(this.computer);

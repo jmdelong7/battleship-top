@@ -26,6 +26,7 @@ export class Gameboard {
 
   clearBoard() {
     this.board = Array.from({ length: 10 }, () => Array(10).fill(null));
+    this.shipsSunk = 0;
   }
 
   placeShip(shipName, coord, direction = 'vertical') {
