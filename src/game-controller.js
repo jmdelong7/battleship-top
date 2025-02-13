@@ -88,10 +88,17 @@ export class GameController {
   }
 
   addCellAttackListener(cell, coord) {
+    function delay(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
     cell.addEventListener(
       'click',
-      () => {
+      async () => {
         this.attack(this.computer, coord);
+        document.body.style.pointerEvents = 'none';
+        await delay(500);
+        document.body.style.pointerEvents = 'auto';
         this.computerAttack();
       },
       {
