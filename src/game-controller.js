@@ -146,4 +146,10 @@ export class GameController {
       this.placeShipsRandomly(this.computer);
     });
   }
+
+  gameOver() {
+    const hSunk = this.human.shipsSunk;
+    const cSunk = this.computer.shipsSunk;
+    if (hSunk < 5 && cSunk < 5) return null;
+  }
 }
