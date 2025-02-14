@@ -14,6 +14,9 @@ export class GameController {
 
     this.openCells = this.possibleCoords();
     this.addListeners();
+
+    this.placeShipsRandomly(this.human);
+    this.placeShipsRandomly(this.computer);
   }
 
   possibleCoords(arr = []) {
@@ -35,11 +38,12 @@ export class GameController {
   }
 
   updateCellDataState(player, coord) {
+    const name = player === this.human ? 'human' : 'computer';
     const cell = this.getDisplayCell(player, coord);
     if (!player.getBoardCell(coord)) {
       cell.setAttribute('data-state', 'empty');
     } else {
-      cell.setAttribute('data-state', player.getBoardCell(coord));
+      cell.setAttribute('data-state', `${name}-${player.getBoardCell(coord)}`);
     }
   }
 
@@ -121,6 +125,7 @@ export class GameController {
     this.addAllAttackListeners();
     this.newGameBtn.addEventListener('click', () => this.newGame());
     this.randomBtn.addEventListener('click', () => {
+      this.newGame();
       this.placeShipsRandomly(this.human);
       this.placeShipsRandomly(this.computer);
     });

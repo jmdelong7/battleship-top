@@ -112,26 +112,26 @@ svg {
   background-color: var(--hit-color);
 }
 
-.game__board__cell[data-state='miss'] {
+.game__board__cell[data-state*='-miss'] {
   background-color: var(--miss-color);
 }
 
-.game__board__cell[data-state='carrier'] {
+.game__board__cell[data-state='human-carrier'] {
   background-color: var(--carrier-color);
 }
 
-.game__board__cell[data-state='battleship'] {
+.game__board__cell[data-state='human-battleship'] {
   background-color: var(--battleship-color);
 }
 
-.game__board__cell[data-state='cruiser'] {
+.game__board__cell[data-state='human-cruiser'] {
   background-color: var(--cruiser-color);
 }
 
-.game__board__cell[data-state='submarine'] {
+.game__board__cell[data-state='human-submarine'] {
   background-color: var(--submarine-color);
 }
 
-.game__board__cell[data-state='destroyer'] {
+.game__board__cell[data-state='human-destroyer'] {
   background-color: var(--destroyer-color);
 }
