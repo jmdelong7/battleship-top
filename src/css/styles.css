@@ -82,6 +82,54 @@ svg {
   --miss-color: hsl(0, 0%, 57%);
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(237, 237, 237);
+}
+
+main {
+  width: 700px;
+}
+
+.heading {
+  text-align: center;
+  margin: 1rem;
+  font-weight: bold;
+  font-size: 32px;
+}
+
+.settings {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 16px;
+}
+
+.settings__btn {
+  margin: 0.25rem;
+  padding: 0 8px;
+}
+
+.data {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.data__text {
+  display: flex;
+  width: 320px;
+}
+
+.data__text > p {
+  width: 100px;
+}
+
+#human-hit,
+#computer-hit {
+  padding-left: 8px;
+}
+
 .game__board {
   display: grid;
   grid-template-rows: repeat(10, 1fr);
@@ -134,4 +182,8 @@ svg {
 
 .game__board__cell[data-state='human-destroyer'] {
   background-color: var(--destroyer-color);
+}
+
+.data {
+  display: flex;
 }

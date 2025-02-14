@@ -6,38 +6,54 @@
   <title>Battleship</title>
 </head>
 <body>
-  <header class="heading">
-    <h1 class="heading__title">Battleship</h1>
-  </header>
-  <div class="settings">
-    <button class="settings__btn settings--random" id="random">Random</button>
-    <button class="settings__btn settings--reset" id="new-game">New Game</button>
-  </div>
-  <div class="game">
-    <div class="game__board game__board--human">
-      <div class="game__board__row"></div>
-      <div class="game__board__row"></div>
-      <div class="game__board__row"></div>
-      <div class="game__board__row"></div>
-      <div class="game__board__row"></div>
-      <div class="game__board__row"></div>
-      <div class="game__board__row"></div>
-      <div class="game__board__row"></div>
-      <div class="game__board__row"></div>
-      <div class="game__board__row"></div>
+  <main>
+    <header class="heading">
+      <h1 class="heading__title">Battleship</h1>
+    </header>
+    <div class="settings">
+      <button class="settings__btn settings--random" id="random">Random</button>
+      <button class="settings__btn settings--reset" id="new-game">New Game</button>
     </div>
-    <div class="game__board game__board--computer">
-      <div class="game__board__row"></div>
-      <div class="game__board__row"></div>
-      <div class="game__board__row"></div>
-      <div class="game__board__row"></div>
-      <div class="game__board__row"></div>
-      <div class="game__board__row"></div>
-      <div class="game__board__row"></div>
-      <div class="game__board__row"></div>
-      <div class="game__board__row"></div>
-      <div class="game__board__row"></div>
+    <div class="game">
+      <div class="game__board game__board--human">
+        <div class="game__board__row"></div>
+        <div class="game__board__row"></div>
+        <div class="game__board__row"></div>
+        <div class="game__board__row"></div>
+        <div class="game__board__row"></div>
+        <div class="game__board__row"></div>
+        <div class="game__board__row"></div>
+        <div class="game__board__row"></div>
+        <div class="game__board__row"></div>
+        <div class="game__board__row"></div>
+      </div>
+      <div class="game__data game__data--human">
+      </div>
+      <div class="game__board game__board--computer">
+        <div class="game__board__row"></div>
+        <div class="game__board__row"></div>
+        <div class="game__board__row"></div>
+        <div class="game__board__row"></div>
+        <div class="game__board__row"></div>
+        <div class="game__board__row"></div>
+        <div class="game__board__row"></div>
+        <div class="game__board__row"></div>
+        <div class="game__board__row"></div>
+        <div class="game__board__row"></div>
+      </div>
     </div>
-  </div>
+    <div class="data">
+      <div class="data__text data__text--human">
+        <p id="human-sunk">Sunk: 0</p>
+        <p id="human-hit">Hit: 0</p>
+        <p id="human-miss">Miss: 0</p>
+      </div>
+      <div class="data__text data__text--computer">
+        <p id="computer-sunk">Sunk: 0</p>
+        <p id="computer-hit">Hit: 0</p>
+        <p id="computer-miss">Miss: 0</p>
+      </div>
+    </div>
+  </main>
 </body>
 </html>
