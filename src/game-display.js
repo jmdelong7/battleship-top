@@ -7,6 +7,9 @@ export class GameDisplay {
 
     this.randomBtn = document.getElementById('random');
     this.newGameBtn = document.getElementById('new-game');
+
+    this.humanData = document.querySelector('data__text--human');
+    this.computerData = document.querySelector('data__text--computer');
   }
 
   initGameboardDisplay(board) {

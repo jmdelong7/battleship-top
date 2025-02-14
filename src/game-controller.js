@@ -55,6 +55,10 @@ export class GameController {
     }
   }
 
+  updateGameData(player, coord) {
+    // on
+  }
+
   newGame() {
     this.human = new Gameboard();
     this.computer = new Gameboard();
@@ -123,7 +127,7 @@ export class GameController {
 
   addListeners() {
     this.addAllAttackListeners();
-    this.newGameBtn.addEventListener('click', () => this.newGame());
+    // this.newGameBtn.addEventListener('click', () => this.newGame());
     this.randomBtn.addEventListener('click', () => {
       this.newGame();
       this.placeShipsRandomly(this.human);
