@@ -11,6 +11,8 @@ export class GameController {
     this.computerDisplay = this.display.computerBoard;
     this.randomBtn = this.display.randomBtn;
     this.newGameBtn = this.display.newGameBtn;
+    this.humanData = this.display.humanData;
+    this.computerData = this.display.computerData;
 
     this.openCells = this.possibleCoords();
     this.addListeners();
@@ -55,10 +57,6 @@ export class GameController {
     }
   }
 
-  updateGameData(player, coord) {
-    // on
-  }
-
   newGame() {
     this.human = new Gameboard();
     this.computer = new Gameboard();
@@ -70,6 +68,18 @@ export class GameController {
   placeShipsRandomly(player) {
     player.placeShipsRandomly();
     this.updatePlayerGameboard(player);
+  }
+
+  updateGameData(player, action) {
+    const data = player === this.human ? this.humanData : this.computerData;
+    let [sunk, hit, miss] = [...data.children];
+    const spans = [sunk, hit, miss].map((ele) => ele.querySelector('span'));
+
+    [sunk, hit, miss] = [...spans];
+    if (action === 'hit') hit.textContent = Number(hit.textContent) + 1;
+    if (action === 'miss') miss.textContent = Number(miss.textContent) + 1;
+
+    sunk.textContent = player.shipsSunk;
   }
 
   attack(player, coord) {
@@ -92,7 +102,8 @@ export class GameController {
     this.openCells[lastEle] = temp;
 
     const coord = this.openCells.pop();
-    this.attack(this.human, coord);
+    const result = this.attack(this.human, coord);
+    this.updateGameData(this.human, result.result);
   }
 
   addCellAttackListener(cell, coord) {
@@ -103,7 +114,8 @@ export class GameController {
     cell.addEventListener(
       'click',
       async () => {
-        this.attack(this.computer, coord);
+        const result = this.attack(this.computer, coord);
+        this.updateGameData(this.computer, result.result);
         document.body.style.pointerEvents = 'none';
         await delay(500);
         document.body.style.pointerEvents = 'auto';
